@@ -58,7 +58,7 @@ const Chat = () => {
 
     const FuncAsk = () => {
         setBlock(true);
-        setResposta(diálogos[pergunta]?diálogos[pergunta]
+        setResposta(diálogos[pergunta.toLocaleLowerCase()]?diálogos[pergunta.toLocaleLowerCase()]
             :"Desculpe não consegui entender")
         setHistorico([...historico, {
             pergunta: pergunta
@@ -67,7 +67,7 @@ const Chat = () => {
         setTimeout(() => {
             setHistorico([...historico, {
                 pergunta: pergunta,
-                resposta: diálogos[pergunta]?diálogos[pergunta]
+                resposta: diálogos[pergunta.toLocaleLowerCase()]?diálogos[pergunta.toLocaleLowerCase()]
                     :"Desculpe não consegui entender"
             }]);
             setBlock(false);

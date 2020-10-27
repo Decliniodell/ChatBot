@@ -43,37 +43,46 @@ const Chat = () => {
       }));
 
     const classes = useStyles();
-    const [resposta, setResposta] = useState("")
     const [pergunta, setPergunta] = useState("")
     const [historico, setHistorico] = useState([])
     const [block, setBlock] = useState(false)
 
     const diálogos = {
-        oi: "olá tudo bem diga oque você precisa",
-        ola: "olá tudo bem diga oque você precisa",
-        opa: "olá tudo bem diga oque você precisa",
-        blz: "olá tudo bem diga oque você precisa"
-
+        oi: "Olá tudo bem oque você precisa ?",
+        ola: "Olá tudo bem oque você precisa ?",
+        opa: "Olá tudo bem oque você precisa ?",
+        blz: "Olá tudo bem oque você precisa ?",
     }
 
     const FuncAsk = () => {
-        setBlock(true);
-        setResposta(diálogos[pergunta.toLocaleLowerCase()]?diálogos[pergunta.toLocaleLowerCase()]
-            :"Desculpe não consegui entender")
-        setHistorico([...historico, {
-            pergunta: pergunta
-        }]);
 
-        setTimeout(() => {
-            setHistorico([...historico, {
-                pergunta: pergunta,
-                resposta: diálogos[pergunta.toLocaleLowerCase()]?diálogos[pergunta.toLocaleLowerCase()]
-                    :"Desculpe não consegui entender"
-            }]);
-            setBlock(false);
-        }, Math.round(Math.random() * (4 -1) + 1) + "000");
+        setBlock(true);
+
+        var askTemp = pergunta
+            .toLocaleLowerCase()
+            .replace(/\W{2,}/g, " ")
+            .split([" "])
+
+        for(var i = 0; i <= askTemp.length; i++)
+        {
+
+            if (diálogos[askTemp[i]]) {
+                setHistorico([...historico, {
+                    pergunta: pergunta,
+                    resposta: diálogos[askTemp[i]]
+                }]);
+                i = askTemp.length
+            } else if (i < askTemp.length) {
+                setHistorico([...historico, {
+                    pergunta: pergunta,
+                    resposta: "Desculpe não consegui entender"
+                }]);
+            }
+
+        }
+        
         setPergunta("");
-        console.log(historico)
+        setBlock(false);
     }
 
 
@@ -123,6 +132,7 @@ const Chat = () => {
                                 <TextField 
                                     variant="filled"
                                     fullWidth={true}
+                                    // placeholder="Digite: Oi"
                                     inputProps={{className: classes.text, maxLength: 80}}
                                     value={pergunta}
                                     onChange={!block?(e) => {setPergunta(e.target.value)}:''}

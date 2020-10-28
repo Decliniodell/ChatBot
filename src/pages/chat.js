@@ -17,6 +17,7 @@ import {
     Row,
     Col
 } from 'react-bootstrap'
+import ChatBOT from '../imgs/ChatBOT.png'
 
 
 const Chat = () => {
@@ -131,9 +132,7 @@ const Chat = () => {
                             <Col xs={12} style={{padding: "0"}}>
                                 <AppBar style={{background: "#007bff"}} position={'relative'}>
                                     <Toolbar>
-                                        <Typography variant='h6'>
-                                            Chatbot
-                                        </Typography>
+                                        <img src={ChatBOT} width="100px" alt="BOT"/>
                                     </Toolbar>
                                 </AppBar>
                                 

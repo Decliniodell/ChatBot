@@ -39,7 +39,43 @@ const Chat = () => {
         },
         input: {
             color: "white"
-          }
+        },
+        balao: {
+            background: "#007bff",
+            borderRadius: "10px",
+            padding: "10px 20px",
+            whiteSpace: "normal",
+            position: "relative",
+            filter: "drop-shadow(10px 10px 5px #0000005c)",
+            '&::after': {
+                content: '""',
+                width: "0",
+                height: "0",
+                position: "absolute",
+                borderRight: "30px solid transparent",
+                borderTop: "20px solid #007bff",
+                bottom: "-18px",
+                left: "2%",
+            }
+        },
+        balao2: {
+            background: "#007bff",
+            borderRadius: "10px",
+            padding: "10px 20px",
+            whiteSpace: "normal",
+            position: "relative",
+            filter: "drop-shadow(10px 10px 5px #0000005c)",
+            '&::after': {
+                content: '""',
+                width: "0",
+                height: "0",
+                position: "absolute",
+                borderLeft: "30px solid transparent",
+                borderTop: "20px solid #007bff",
+                bottom: "-18px",
+                right: "2%",
+            }
+        }
       }));
 
     const classes = useStyles();
@@ -93,7 +129,7 @@ const Chat = () => {
                     <Paper className={classes.paperBack}>
                         <Row className="justify-content-center" style={{margin: "0"}}>
                             <Col xs={12} style={{padding: "0"}}>
-                                <AppBar position={'relative'}>
+                                <AppBar style={{background: "#007bff"}} position={'relative'}>
                                     <Toolbar>
                                         <Typography variant='h6'>
                                             Chatbot
@@ -103,11 +139,11 @@ const Chat = () => {
                                 
                             </Col>
                         </Row>
-                        <Row className="justify-content-center" style={{margin: "0", position: "absolute", bottom: "56px", width: "100%", padding: "5px"}}>
+                        <Row className="justify-content-center" style={{margin: "0", position: "absolute", bottom: "56px", width: "100%", padding: "0 20px"}}>
                             {historico.map((item) =>
                                 <>
                                     {item.resposta?
-                                        <Col xs="6" style={{background: "#007bff", borderRadius: "10px", padding: "10px 0", whiteSpace: "normal"}}>
+                                        <Col xs="6" className={classes.balao}>
                                             <Typography align="center" className={classes.text}>
                                                 {item.resposta}
                                             </Typography>
@@ -118,12 +154,14 @@ const Chat = () => {
                                             <FiberManualRecord style={{margin: "3.5% 0px", color: "#007bff"}}/>
                                         </Col>}
                                     <Col xs="6"></Col>
+                                    <Col style={{height: "30px"}} xs="12"></Col>
                                     <Col xs="6"></Col>
-                                    <Col xs="6" style={{background: "#007bff", borderRadius: "10px", padding: "10px 0", whiteSpace: "normal"}}>
+                                    <Col xs="6" className={classes.balao2}>
                                         <Typography align="center" className={classes.text}>
                                             {item.pergunta}
                                         </Typography>
                                     </Col>
+                                    <Col style={{height: "30px"}} xs="12"></Col>
                                 </>
                             )}
                         </Row>
